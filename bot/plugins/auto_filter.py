@@ -206,7 +206,7 @@ async def auto_filter(bot, update):
         reply_markup = InlineKeyboardMarkup(result[0])
 
         try:
-            await bot.send_photo(
+            msg=await bot.send_photo(
                 chat_id = update.chat.id,
                 photo= MASSAGE_PHOTO,
                 caption=f"<b>🗂️Total File :- {(len_results)} </b>\n<b>🎬File Name :-</b> <code>{query}</code>",
@@ -214,6 +214,8 @@ async def auto_filter(bot, update):
                 parse_mode="html",
                 reply_to_message_id=update.message_id
             )
+            await asyncio.sleep(600)
+            await msg.delete()
 
         except ButtonDataInvalid:
             print(result[0])
